@@ -10,9 +10,9 @@
         }
     ],
     "require": {
-        "symfony/console": "5.4.*",
-        "lexik/jwt-authentication-bundle": "^2.11",
-        "symfony/security-bundle": "5.4.x",
+        "symfony/console": "6.0.*",
+        "lexik/jwt-authentication-bundle": "^2.14",
+        "symfony/security-bundle": "6.0.x",
         "everyworkflow/core-bundle": "dev-main",
         "everyworkflow/eav-bundle": "dev-main",
         "everyworkflow/data-grid-bundle": "dev-main"

@@ -42,19 +42,17 @@ class Mongo_2021_01_01_02_00_00_User_Entity_Migration implements MigrationInterf
 
     public function migrate(): bool
     {
-        /** @var EntityDocument $userEntity */
-        $userEntity = $this->entityRepository->getDocumentFactory()
-            ->create(EntityDocument::class);
+        $userEntity = $this->entityRepository->create();
         $userEntity
             ->setName('User')
             ->setCode($this->userRepository->getEntityCode())
             ->setClass(UserEntity::class)
             ->setStatus(EntityDocument::STATUS_ENABLE);
-        $this->entityRepository->save($userEntity);
+        $this->entityRepository->saveOne($userEntity);
 
         $attributeData = [
             [
-                'code' => 'firstname',
+                'code' => 'first_name',
                 'name' => 'First name',
                 'entity_code' => $this->userRepository->getEntityCode(),
                 'type' => 'text_attribute',
@@ -63,7 +61,7 @@ class Mongo_2021_01_01_02_00_00_User_Entity_Migration implements MigrationInterf
                 'is_required' => true,
             ],
             [
-                'code' => 'lastname',
+                'code' => 'last_name',
                 'name' => 'Last name',
                 'entity_code' => $this->userRepository->getEntityCode(),
                 'type' => 'text_attribute',
@@ -110,15 +108,15 @@ class Mongo_2021_01_01_02_00_00_User_Entity_Migration implements MigrationInterf
         $sortOrder = 5;
         foreach ($attributeData as $item) {
             $item['sort_order'] = $sortOrder++;
-            $attribute = $this->attributeRepository->getDocumentFactory()
-                ->createAttribute($item);
-            $this->attributeRepository->save($attribute);
+            $attribute = $this->attributeRepository->create($item);
+            $this->attributeRepository->saveOne($attribute);
         }
 
         $indexKeys = [];
-        foreach ($this->userRepository->getIndexNames() as $key) {
+        foreach ($this->userRepository->getIndexKeys() as $key) {
             $indexKeys[$key] = 1;
         }
+
         $this->userRepository->getCollection()
             ->createIndex($indexKeys, ['unique' => true]);
 
@@ -127,9 +125,9 @@ class Mongo_2021_01_01_02_00_00_User_Entity_Migration implements MigrationInterf
 
     public function rollback(): bool
     {
-        $this->attributeRepository->deleteByFilter(['entity_code' => $this->userRepository->getEntityCode()]);
-        $this->entityRepository->deleteByCode($this->userRepository->getEntityCode());
-        $this->userRepository->getCollection()->drop();
+        // $this->attributeRepository->deleteByFilter(['entity_code' => $this->userRepository->getEntityCode()]);
+        // $this->entityRepository->deleteByCode($this->userRepository->getEntityCode());
+        // $this->userRepository->getCollection()->drop();
         return self::SUCCESS;
     }
 }
