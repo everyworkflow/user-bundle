@@ -20,9 +20,13 @@ import AlertAction, { ALERT_TYPE_ERROR, ALERT_TYPE_SUCCESS } from "@EveryWorkflo
 const SUBMIT_SAVE_CHANGES = 'save_changes';
 const SUBMIT_SAVE_CHANGES_AND_CONTINUE = 'save_changes_and_continue';
 
+interface Params {
+    uuid: string | undefined;
+}
+
 const UserFormPage = () => {
     const { dispatch: panelDispatch } = useContext(PanelContext);
-    const { uuid = '' }: { uuid: string | undefined } = useParams();
+    const { uuid = '' }: any = useParams();
     const [form] = Form.useForm();
     const [dataForm, setDataForm] = useState<DataFormInterface>();
     const navigate = useNavigate();

@@ -37,7 +37,7 @@ class Mongo_2021_11_21_11_54_27_User_Data_Seeder implements SeederInterface
             'email' => 'admin@example.com',
             'password' => $this->passwordHasher->hashPassword($authUser, 'admin@123'),
             'dob' => '2020-01-01',
-            'roles' => ['ROLE_ADMIN', 'ROLE_USER'],
+            'roles' => ['admin', 'user'],
         ]));
 
         $this->userRepository->saveOne($this->userRepository->create([
@@ -47,7 +47,7 @@ class Mongo_2021_11_21_11_54_27_User_Data_Seeder implements SeederInterface
             'email' => 'test@example.com',
             'password' => $this->passwordHasher->hashPassword($authUser, 'test@123'),
             'dob' => '2020-01-01',
-            'roles' => ['ROLE_USER'],
+            'roles' => ['user'],
         ]));
 
         return self::SUCCESS;

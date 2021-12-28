@@ -10,12 +10,7 @@
         }
     ],
     "require": {
-        "symfony/console": "6.0.*",
-        "lexik/jwt-authentication-bundle": "^2.14",
-        "symfony/security-bundle": "6.0.x",
-        "everyworkflow/core-bundle": "dev-main",
-        "everyworkflow/eav-bundle": "dev-main",
-        "everyworkflow/data-grid-bundle": "dev-main"
+        "everyworkflow/eav-bundle": "dev-main"
     },
     "autoload": {
         "psr-4": {
