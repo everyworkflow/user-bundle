@@ -13,7 +13,7 @@ use EveryWorkflow\UserBundle\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class GetUserController extends AbstractController
+class DeleteUserController extends AbstractController
 {
     protected UserRepositoryInterface $userRepository;
 
@@ -24,32 +24,25 @@ class GetUserController extends AbstractController
 
     #[EwRoute(
         path: "user/{uuid}",
-        name: 'user.view',
-        methods: 'GET',
-        permissions: 'user.view',
+        name: 'user.delete',
+        methods: 'DELETE',
+        permissions: 'user.delete',
         swagger: [
             'parameters' => [
                 [
                     'name' => 'uuid',
                     'in' => 'path',
-                    'default' => 'create',
                 ]
             ]
         ]
     )]
-    public function __invoke(string $uuid = 'create'): JsonResponse
+    public function __invoke(string $uuid): JsonResponse
     {
-        $data = [];
-
-        if ($uuid !== 'create') {
-            $item = $this->userRepository->findById($uuid);
-            if ($item) {
-                $data['item'] = $item->toArray();
-            }
+        try {
+            $this->userRepository->deleteOneByFilter(['_id' => new \MongoDB\BSON\ObjectId($uuid)]);
+            return new JsonResponse(['detail' => 'ID: ' . $uuid . ' deleted successfully.']);
+        } catch (\Exception $e) {
+            return new JsonResponse(['detail' => $e->getMessage()], 500);
         }
-
-        $data['data_form'] = $this->userRepository->getForm()->toArray();
-
-        return new JsonResponse($data);
     }
 }

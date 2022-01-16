@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace EveryWorkflow\UserBundle\Controller;
 
-use EveryWorkflow\AuthBundle\Security\AuthUserInterface;
 use EveryWorkflow\CoreBundle\Annotation\EwRoute;
 use EveryWorkflow\UserBundle\DataGrid\UserDataGrid;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,7 +31,7 @@ class ListUserController extends AbstractController
         permissions: 'user.list',
         swagger: true
     )]
-    public function __invoke(Request $request, AuthUserInterface $authUser): JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         $dataGrid = $this->userDataGrid->setFromRequest($request);
 

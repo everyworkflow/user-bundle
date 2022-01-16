@@ -50,6 +50,18 @@ class Mongo_2021_11_21_11_54_27_User_Data_Seeder implements SeederInterface
             'roles' => ['user'],
         ]));
 
+        // for ($i = 0; $i < 100; $i++) {
+        //     $this->userRepository->saveOne($this->userRepository->create([
+        //         'username' => 'test' . $i,
+        //         'first_name' => 'Test-' . $i,
+        //         'last_name' => 'User-' . $i,
+        //         'email' => 'test' . $i . '@example.com',
+        //         'password' => $this->passwordHasher->hashPassword($authUser, 'test@123'),
+        //         'dob' => '2020-01-01',
+        //         'roles' => ['user'],
+        //     ]));
+        // }
+
         return self::SUCCESS;
     }
 

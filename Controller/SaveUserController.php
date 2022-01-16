@@ -82,7 +82,7 @@ class SaveUserController extends AbstractController
         $item = $this->userRepository->saveOne($item);
 
         return new JsonResponse([
-            'message' => 'Successfully saved changes.',
+            'detail' => 'Successfully saved changes.',
             'item' => $item->toArray(),
         ]);
     }
