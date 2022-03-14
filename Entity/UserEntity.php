@@ -14,22 +14,6 @@ use Symfony\Component\Validator\Constraints\DateTimeValidator;
 
 class UserEntity extends BaseEntity implements UserEntityInterface
 {
-    #[StringValidation(required: true, minLength: 3, maxLength: 50)]
-    public function setUsername($username)
-    {
-        $this->dataObject->setData(self::KEY_USERNAME, $username);
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUsername()
-    {
-        return $this->dataObject->getData(self::KEY_USERNAME);
-    }
-
     #[StringValidation(required: true, minLength: 5, maxLength: 30)]
     public function setEmail($email)
     {
