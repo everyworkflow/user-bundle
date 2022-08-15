@@ -27,7 +27,7 @@ class UserEntity extends BaseEntity implements UserEntityInterface
         return $this->dataObject->getData(self::KEY_EMAIL);
     }
 
-    #[StringValidation(required: true, minLength: 4, maxLength: 20)]
+    #[StringValidation(required: true)]
     public function setFirstName($firstName)
     {
         $this->dataObject->setData(self::KEY_FIRST_NAME, $firstName);
@@ -40,7 +40,7 @@ class UserEntity extends BaseEntity implements UserEntityInterface
         return $this->dataObject->getData(self::KEY_FIRST_NAME);
     }
 
-    #[StringValidation(required: true, minLength: 4, maxLength: 20)]
+    #[StringValidation(required: true)]
     public function setLastName($lastName)
     {
         $this->dataObject->setData(self::KEY_LAST_NAME, $lastName);
